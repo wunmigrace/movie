@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "watch": "npx tailwindcss -i ./frontend/src/input.css -o ./frontend/css/app.css --watch",
+    "dev": "npx tailwindcss -i ./frontend/src/input.css -o ./frontend/css/app.css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1"
+  }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+    <div class="min-h-screen w-full bg-slate-950 bg-opacity-85v text-white">
+        <!-- Header -->
+        <header>
+            <div class="max-w-6xl mx-auto flex items-center justify-between">
+                <aside>
+                    <h1 class="text-2xl font-bold py-2">
+                        <span class="text-orange-400">MOVIES</span> List
+                    </h1>
+                </aside>
+
+                <aside>
+                    <a href="movies.html" class="py-2 inline-block">
+                        All Movies
+                    </a>
+                </aside>
+            </div>
+        </header>
+
+        <!-- Movies List Section -->
+        <div class="py-7"></div>
+        <div>
+            <section class="max-w-6xl mx-auto">
+                <aside class="flex items-start gap-10">
+                    <img src="../img/dummy.jpg" alt="" class="w-60">
+                    <div>
+                        <h2 class="font-semibold text-2xl" id="mov_title"></h2>
+                        <p class="text-sm" id="mov_release"></p>
+                    </div>
+                </aside>
+            </section>
+        </div>
+    </div>
+    <script src="../js/app.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            async function fetchMovies() {
+                let url = new URL(location.href);
+                let el_id = url.searchParams.get('el_id');
+                if (el_id != undefined && el_id != "" && el_id != null) {
+                    let formData = new FormData();
+                    formData.append('el_id', el_id);
+                    await fetch('./../../api/movies/fetch_movie.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        document.getElementById('mov_title').innerText = data.title;
+                        document.getElementById('mov_release').innerText = data.released;
+                    })
+                }
+            }
+            fetchMovies();
+        });
+    </script>
+</body>
+</html>
